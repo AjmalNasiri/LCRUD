@@ -1,0 +1,37 @@
+http:
+  port: 8080
+  admin:
+    port: 9876
+  apiEndpoints:
+    users:
+      host: localhost
+      paths:
+        - /users/**
+    products:
+      host: localhost
+      paths:
+        - /products/**
+  serviceEndpoints:
+    users:
+      url: http://localhost:8000
+    products:
+      url: http://localhost:9000
+  policies:
+    - cors
+  pipelines:
+    users:
+      apiEndpoints:
+        - users
+      policies:
+        - cors:
+            origin: "*"
+            methods: GET,HEAD,PUT,PATCH,POST,DELETE
+            allowedHeaders: "Content-Type,Authorization"
+  products:
+      apiEndpoints:
+        - products
+      policies:
+        - cors:
+            origin: "*"
+            methods: GET,HEAD,PUT,PATCH,POST,DELETE
+            allowedHeaders: "Content-Type,Authorization"
